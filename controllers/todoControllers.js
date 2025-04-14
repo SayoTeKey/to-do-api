@@ -25,5 +25,20 @@ const createTodoController = async (req, res) => {
     }
 };
 
+// GET - READ
+// Wir brauchen den `find()`-Befehl von Mongoose
+
+const getAllTodosController = async (req, res) => {
+    try {
+        // Finde alle Todos in der Datenbank mit der Methode `find()`
+        const allTodos = await todoModel.find({});
+
+        // Sende die Todos zurück an den Client mit dem Statuscode 200 (OK)
+        res.status(200).json(allTodos);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // Kontrollers exportieren
-export { createTodoController };
+export { createTodoController, getAllTodosController };

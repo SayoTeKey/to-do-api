@@ -6,7 +6,7 @@
 // 4. Definiere die Routen
 // 5. Exportiere den Router
 import express from "express";
-import { createTodoController, deleteTodoController, getAllTodosController } from "../controllers/todoControllers.js";
+import { createTodoController, deleteTodoController, getAllTodosController, updateTodoController } from "../controllers/todoControllers.js";
 
 // 3. Erstelle einen Router aus Express
 const todoRouter = express.Router();
@@ -19,6 +19,7 @@ todoRouter.post("/", createTodoController);
 todoRouter.get("/", getAllTodosController);
 
 // UPDATE - UPDATE
+todoRouter.put("/:id", updateTodoController);
 
 // DELETE - DELETE
 todoRouter.delete("/:id", deleteTodoController);

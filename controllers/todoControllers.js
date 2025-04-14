@@ -47,8 +47,13 @@ const getAllTodosController = async (req, res) => {
 const updateTodoController = async (req, res) => {
     // Hol dir die ID von der URL
     const todoId = req.params.id;
+
+    // Hol dir den neuen Todo-Text von der Anfrage
+    const newTodoText = req.body;
     try {
-        await todoModel.findByIdAndUpdate();
+        await todoModel.findByIdAndUpdate(todoId, { $set: newTodoText, }, { new: true });
+        // Sende die Todos zurück an den Client mit dem Statuscode 200 (OK)
+        res.status(200).json({ message: "Todo erfolgreich aktualisiert" });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -73,7 +78,7 @@ const deleteTodoController = async (req, res) => {
 };
 
 // Kontrollers exportieren
-export { createTodoController, getAllTodosController, deleteTodoController };
+export { createTodoController, getAllTodosController, deleteTodoController, updateTodoController };
 
 
 // nach Controllers(export) kommt immer in Route einfügen!
